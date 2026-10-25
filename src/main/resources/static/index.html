@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMERTÀ · Menú Principal</title>
+    <link rel="stylesheet" href="/omerta.css">
+</head>
+<body>
+
+<header class="cabecera">
+    <div class="logo">OMERTÀ App</div>
+    <span class="chip chip-tipo">Panel de Control & REST API</span>
+</header>
+
+<main class="contenedor">
+
+    <h1 class="titulo-seccion">Menú Principal</h1>
+    <p class="contador">Selecciona la vista a la que deseas acceder:</p>
+
+    <section class="rejilla">
+
+        <!-- Opción 1: Vista Web Thymeleaf -->
+        <article class="tarjeta">
+            <h2>1. Interfaz Web (Thymeleaf)</h2>
+            <p class="meta">
+                <span class="chip chip-estado activo">HTML + CSS</span>
+            </p>
+            <p>Gestión visual de los negocios tapadera y formulario de alta.</p>
+            <div class="acciones" style="justify-content: flex-start; margin-top: 1rem; gap: .5rem; flex-wrap: wrap;">
+                <a class="boton" href="/negocios">Ver Negocios (/negocios)</a>
+                <a class="boton boton-secundario" href="/negocios/nuevo">+ Registrar Negocio</a>
+            </div>
+        </article>
+
+        <!-- Opción 2: API REST (JSON) -->
+        <article class="tarjeta">
+            <h2>2. API REST (JSON)</h2>
+            <p class="meta">
+                <span class="chip chip-tipo">JSON</span>
+            </p>
+            <p>Consultas directas en formato JSON:</p>
+
+            <ul style="padding-left: 1.2rem; font-size: .88rem; color: var(--texto-secundario); margin: .5rem 0 1rem;">
+                <li><a href="/api/negocios" target="_blank"><code>GET /api/negocios</code></a> (Todos)</li>
+                <li><a href="/api/negocios/1" target="_blank"><code>GET /api/negocios/1</code></a> (Detalle ID 1)</li>
+                <li><a href="/api/negocios/tipo/RESTAURANTE" target="_blank"><code>GET /api/negocios/tipo/RESTAURANTE</code></a></li>
+                <li><a href="/api/negocios/riesgo?min=7" target="_blank"><code>GET /api/negocios/riesgo?min=7</code></a></li>
+            </ul>
+
+            <div class="acciones" style="justify-content: flex-start;">
+                <a class="boton" href="/api/negocios" target="_blank">Consultar API JSON</a>
+            </div>
+        </article>
+
+    </section>
+
+</main>
+
+</body>
+</html>

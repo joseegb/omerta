@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${nombreOrganizacion} + ' · Registrar'">OMERTÀ · Registrar</title>
+    <link rel="stylesheet" th:href="@{/omerta.css}" href="/omerta.css">
+</head>
+<body>
+
+<header class="cabecera">
+    <a class="logo" th:href="@{/}" th:text="${nombreOrganizacion}">OMERTÀ App</a>
+    <nav class="filtros">
+        <a th:href="@{/negocios}">Volver al Listado</a>
+    </nav>
+</header>
+
+<main class="contenedor">
+    <h1 class="titulo-seccion">Registrar Nuevo Negocio Tapadera</h1>
+
+    <p class="aviso error" th:if="${error}" th:text="${error}">Error en la validación</p>
+
+    <form class="formulario" th:action="@{/negocios/nuevo}" th:object="${negocio}" method="post">
+
+        <div class="campo">
+            <label for="nombre">Nombre del Negocio</label>
+            <input type="text" th:field="*{nombre}" required maxlength="80">
+        </div>
+
+        <div class="fila">
+            <div class="campo">
+                <label for="tipo">Tipo / Sector</label>
+                <input type="text" th:field="*{tipo}" required maxlength="30">
+            </div>
+            <div class="campo">
+                <label for="encargado">Encargado Responsable</label>
+                <input type="text" th:field="*{encargado}" required maxlength="50">
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="campo">
+                <label for="ingresosLegales">Ingresos Legales (€)</label>
+                <input type="number" th:field="*{ingresosLegales}" step="0.01" min="0" required>
+            </div>
+            <div class="campo">
+                <label for="dineroBlanqueado">Dinero Blanqueado (€)</label>
+                <input type="number" th:field="*{dineroBlanqueado}" step="0.01" min="0" required>
+            </div>
+        </div>
+
+        <div class="fila">
+            <div class="campo">
+                <label for="lvlRiesgoFBI">Nivel Inicial de Riesgo FBI (1-10)</label>
+                <select th:field="*{lvlRiesgoFBI}">
+                    <option th:each="r : ${ {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} }"
+                            th:value="${r}"
+                            th:text="${r}">1</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="activo">Estado Operativo</label>
+                <select th:field="*{activo}">
+                    <option th:value="true">Activo / Operativo</option>
+                    <option th:value="false">Inactivo / Clausurado</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="acciones">
+            <a class="boton boton-secundario" th:href="@{/negocios}">Cancelar</a>
+            <button class="boton" type="submit">Guardar Negocio</button>
+        </div>
+
+    </form>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${nombreOrganizacion} + ' · Negocios'">OMERTÀ · Negocios</title>
+    <link rel="stylesheet" th:href="@{/omerta.css}" href="/omerta.css">
+</head>
+<body>
+
+<header class="cabecera">
+    <a class="logo" th:href="@{/}" th:text="${nombreOrganizacion}">OMERTÀ App</a>
+
+    <nav class="filtros">
+        <a th:href="@{/negocios}" th:classappend="${tipoSeleccionado == null} ? 'activo'">Todos</a>
+        <a th:each="t : ${tipos}"
+           th:href="@{/negocios(tipo=${t})}"
+           th:classappend="${t == tipoSeleccionado} ? 'activo'"
+           th:text="${t}">LAVANDERIA</a>
+    </nav>
+</header>
+
+<main class="contenedor">
+    <h1 class="titulo-seccion" th:text="${tipoSeleccionado} ?: 'Todos los Negocios Tapadera'">Todos los Negocios</h1>
+
+    <p class="aviso alerta-fbi" th:if="${fbiTipoBusca != null}"
+       th:text="'Alerta FBI: Investigación sobre tipo \'' + ${fbiTipoBusca} + '\' (Riesgo +' + ${incrementoRiesgo} + ')'">
+        Alerta FBI activa
+    </p>
+
+    <p class="contador" th:text="${#lists.size(negocios)} + ' negocios bajo control'">12 negocios bajo control</p>
+    <p class="aviso exito" th:if="${mensaje}" th:text="${mensaje}">¡Negocio registrado correctamente!</p>
+
+    <p><a class="boton" th:href="@{/negocios/nuevo}">+ Registrar Nuevo Negocio</a></p>
+
+    <p class="vacio" th:if="${#lists.isEmpty(negocios)}">No hay negocios registrados para esta categoría.</p>
+
+    <section class="rejilla">
+        <article class="tarjeta"
+                 th:each="negocio : ${negocios}"
+                 th:classappend="${negocio.lvlRiesgoFBI >= 7} ? 'alto-riesgo' : (!${negocio.activo} ? 'inactivo' : '')">
+
+            <span class="insignia-riesgo" th:if="${negocio.lvlRiesgoFBI >= 7}"
+                  th:text="'FBI Nivel ' + ${negocio.lvlRiesgoFBI}">FBI Nivel 8</span>
+
+            <h2 th:text="${negocio.nombre}">Nombre del Negocio</h2>
+
+            <p class="meta">
+                <span class="chip chip-tipo" th:text="${negocio.tipo}">LAVANDERIA</span>
+                <span class="chip" th:text="'Encargado: ' + ${negocio.encargado}">Encargado: Tony S.</span>
+                <span class="chip chip-estado"
+                      th:text="${negocio.activo} ? 'OPERATIVO' : 'CLAUSURADO'"
+                      th:classappend="${negocio.activo} ? 'activo' : 'clausurado'">OPERATIVO</span>
+            </p>
+
+            <div class="finanzas">
+                <p><strong>Ingresos Legales:</strong>
+                    <span th:text="${#numbers.formatDecimal(negocio.ingresosLegales, 1, 'POINT', 2, 'COMMA')} + ' €'">10.000,00 €</span>
+                </p>
+                <p><strong>Dinero Blanqueado:</strong>
+                    <span th:text="${#numbers.formatDecimal(negocio.dineroBlanqueado, 1, 'POINT', 2, 'COMMA')} + ' €'">40.000,00 €</span>
+                </p>
+                <p class="total">
+                    <strong>Total Real:</strong>
+                    <strong th:text="${#numbers.formatDecimal(negocio.ingresoTotalReal, 1, 'POINT', 2, 'COMMA')} + ' €'">50.000,00 €</strong>
+                </p>
+                <p class="porcentaje">
+                    <strong>Tasa Blanqueo:</strong>
+                    <span th:text="${#numbers.formatDecimal(negocio.porcentajeBlanqueo, 1, 'POINT', 1, 'COMMA')} + ' %'">80,0 %</span>
+                </p>
+            </div>
+        </article>
+    </section>
+</main>
+
+</body>
+</html>

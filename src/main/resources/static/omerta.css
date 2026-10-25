@@ -1,0 +1,321 @@
+/* =============================================================================
+   omerta.css — Estilo Clásico Mafioso / Sobrio
+   ============================================================================= */
+
+:root {
+    --fondo-principal: #121212;
+    --fondo-tarjeta: #1e1e1e;
+    --fondo-hover: #262626;
+    --borde: #333333;
+    --texto: #e0e0e0;
+    --texto-secundario: #a0a0a0;
+    --dorado-mafia: #c5a059;
+    --dorado-brillo: #e5c158;
+    --rojo-sangre: #8b0000;
+    --rojo-alerta: #d32f2f;
+    --verde-operativo: #2e7d32;
+    --fuente-clasica: 'Georgia', 'Times New Roman', serif;
+    --fuente-interfaz: system-ui, -apple-system, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--fondo-principal);
+    color: var(--texto);
+    font-family: var(--fuente-interfaz);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--dorado-mafia);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--dorado-brillo);
+}
+
+.contenedor {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* ---------- CABECERA Y FILTROS ---------- */
+.cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.2rem 2rem;
+    background-color: #0a0a0a;
+    border-bottom: 2px solid var(--dorado-mafia);
+}
+
+.logo {
+    font-family: var(--fuente-clasica);
+    font-size: 1.4rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--dorado-mafia);
+    text-transform: uppercase;
+}
+
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
+}
+
+.filtros a {
+    padding: .3rem .75rem;
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+    color: var(--texto-secundario);
+    font-size: .85rem;
+    transition: all .2s ease;
+}
+
+.filtros a:hover {
+    border-color: var(--dorado-mafia);
+    color: var(--texto);
+}
+
+.filtros a.activo {
+    background-color: var(--dorado-mafia);
+    border-color: var(--dorado-mafia);
+    color: #000000;
+    font-weight: bold;
+}
+
+/* ---------- TITULARES ---------- */
+.titulo-seccion {
+    font-family: var(--fuente-clasica);
+    font-size: 1.6rem;
+    color: var(--dorado-mafia);
+    border-bottom: 1px solid var(--borde);
+    padding-bottom: .5rem;
+    margin: 1.5rem 0 1rem;
+}
+
+.contador {
+    color: var(--texto-secundario);
+    font-size: .95rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- REJILLA Y TARJETAS ---------- */
+.rejilla {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+.tarjeta {
+    position: relative;
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    padding: 1.25rem;
+    transition: border-color .2s ease, background-color .2s ease;
+}
+
+.tarjeta:hover {
+    border-color: var(--dorado-mafia);
+    background-color: var(--fondo-hover);
+}
+
+.tarjeta.alto-riesgo {
+    border-left: 4px solid var(--rojo-alerta);
+}
+
+.tarjeta.inactivo {
+    opacity: 0.55;
+}
+
+.tarjeta h2 {
+    font-family: var(--fuente-clasica);
+    font-size: 1.2rem;
+    margin: 0 0 .5rem 0;
+    color: #ffffff;
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: .8rem;
+}
+
+.chip {
+    font-size: .75rem;
+    padding: .2rem .5rem;
+    border-radius: 3px;
+    background-color: #2a2a2a;
+    color: var(--texto-secundario);
+}
+
+.chip-tipo {
+    border: 1px solid var(--borde);
+    color: var(--dorado-mafia);
+}
+
+.chip-estado.activo {
+    background-color: rgba(46, 125, 50, .2);
+    color: #81c784;
+}
+
+.chip-estado.clausurado {
+    background-color: rgba(211, 47, 47, .2);
+    color: #e57373;
+}
+
+.insignia-riesgo {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: .7rem;
+    font-weight: bold;
+    background-color: var(--rojo-sangre);
+    color: #ffffff;
+    padding: .2rem .5rem;
+    border-radius: 3px;
+    letter-spacing: .5px;
+}
+
+/* ---------- FINANZAS ---------- */
+.finanzas {
+    font-size: .88rem;
+    border-top: 1px solid var(--borde);
+    padding-top: .75rem;
+    margin-top: .5rem;
+}
+
+.finanzas p {
+    margin: .3rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.finanzas .total {
+    color: var(--dorado-brillo);
+    font-weight: bold;
+    font-size: .95rem;
+}
+
+/* ---------- AVISOS Y ALERTAS ---------- */
+.aviso {
+    padding: .8rem 1.1rem;
+    border-radius: 4px;
+    font-size: .9rem;
+    margin: 1rem 0;
+}
+
+.alerta-fbi {
+    background-color: rgba(139, 0, 0, 0.25);
+    border: 1px solid var(--rojo-sangre);
+    color: #ff9999;
+}
+
+.exito {
+    background-color: rgba(46, 125, 50, 0.25);
+    border: 1px solid var(--verde-operativo);
+    color: #a5d6a7;
+}
+
+.error {
+    background-color: rgba(211, 47, 47, 0.25);
+    border: 1px solid var(--rojo-alerta);
+    color: #ef9a9a;
+}
+
+/* ---------- BOTONES Y ACCIONES ---------- */
+.boton {
+    display: inline-block;
+    padding: .65rem 1.2rem;
+    border: 1px solid var(--dorado-mafia);
+    border-radius: 4px;
+    background-color: var(--dorado-mafia);
+    color: #000000;
+    font-weight: bold;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.boton:hover {
+    background-color: var(--dorado-brillo);
+    border-color: var(--dorado-brillo);
+    color: #000000;
+}
+
+.boton-secundario {
+    background-color: transparent;
+    border-color: var(--borde);
+    color: var(--texto);
+}
+
+.boton-secundario:hover {
+    border-color: var(--texto-secundario);
+    background-color: #222222;
+}
+
+/* ---------- FORMULARIO ---------- */
+.formulario {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 520px;
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    padding: 1.75rem;
+    margin-top: 1rem;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.campo label {
+    font-size: .85rem;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.campo input, .campo select {
+    height: 2.6rem;
+    padding: .5rem .75rem;
+    border-radius: 4px;
+    border: 1px solid var(--borde);
+    background-color: #141414;
+    color: var(--texto);
+    font-size: .95rem;
+}
+
+.campo input:focus, .campo select:focus {
+    outline: none;
+    border-color: var(--dorado-mafia);
+}
+
+.fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.acciones {
+    display: flex;
+    gap: .75rem;
+    justify-content: flex-end;
+    margin-top: .5rem;
+}
